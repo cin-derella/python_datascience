@@ -1,6 +1,6 @@
 import time
 
-def costTime(args):  
+def costTime(args):
     def _costTime(func):
         def __constTime(name):
             startTime = time.time()
