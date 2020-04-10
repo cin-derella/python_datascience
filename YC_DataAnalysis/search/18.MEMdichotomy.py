@@ -1,9 +1,3 @@
-filePath = '../YCdata/csdnsortbyuser.txt'
-
-csdnInputFile = open(filePath, 'rb')
-csdnList = csdnInputFile.readlines()
-
-
 def search2(searchStr, lengthList):
     low = 0  # first index number
     high = len(lengthList) - 1  # last index number
@@ -32,19 +26,35 @@ def search2(searchStr, lengthList):
     return -1
 
 
+def getuser(num):
+    csdnInputFile.seek(num, 0)
+    line = csdnInputFile.readline()
+    line = line.decode('gbk', 'ignore')
+    lineList = line.split(' # ')
+    return lineList[0]
+
+
+filePath = '../YCdata/csdnindexsort.txt'
+csdnInputFile = open(filePath, 'rb')
+csdnList = csdnInputFile.readlines()
+
 lengthList = [0]
 for line in csdnList:
-    lengthList.append(len(line))  # read every line to  lengthList
+    lengthList.append(len(line))
+del csdnList
 
 i = 0
 length = len(lengthList)
 while i < length - 1:
     lengthList[i + 1] += lengthList[i]  # data overlay to get positions
     i += 1
-print('Index ready')
+del lengthList[len(lengthList) - 1]  # delete the last one
+
+lengthList.sort(key=lambda x: getuser(x))  # sort index
+print('Index Over')
 
 while True:
     searchStr = input('Input data :')
-    search2(searchStr, lengthList)
+    search2(searchStr,lengthList)
 
 csdnInputFile.close()
