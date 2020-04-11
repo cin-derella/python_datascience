@@ -16,7 +16,7 @@ def get_data(name):
 
 
 @app.route('/csdn/<name>')
-def get_data(name):
+def get_data1(name):
     return str(csdn.search2(name))
 
 
