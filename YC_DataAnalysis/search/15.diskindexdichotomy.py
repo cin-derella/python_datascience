@@ -11,6 +11,7 @@ def search2(searchStr):
         csdnIndexFile.seek(10 * (mid - 1), 0)
         lineEval = csdnIndexFile.read(10)
         lineEval = eval(lineEval)  # turn to  int
+        print(lineEval)
 
         csdnFile.seek(lineEval, 0)
         line = csdnFile.readline()
